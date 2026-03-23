@@ -1,10 +1,3 @@
-//
-//  RickAndMortApp.swift
-//  RickAndMort
-//
-//  Created by Okan on 17.03.2026.
-//
-
 import SwiftUI
 
 @main

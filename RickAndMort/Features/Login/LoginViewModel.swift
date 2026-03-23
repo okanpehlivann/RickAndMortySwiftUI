@@ -1,10 +1,3 @@
-//
-//  LoginViewModel.swift
-//  RickAndMort
-//
-//  Created by Okan on 18.03.2026.
-//
-
 import Foundation
 import Observation
 

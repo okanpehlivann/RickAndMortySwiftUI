@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  RickAndMort
-//
-//  Created by Okan on 18.03.2026.
-//
-
 import SwiftUI
 
 struct LoginView: View {
@@ -26,15 +19,15 @@ struct LoginView: View {
                     .foregroundColor(.white)
                 
                 VStack(spacing: 15) {
-                    TextField("Kullanıcı Adı", text: $viewModel.username)
+                    TextField("", text: $viewModel.username, prompt: Text("Kullanıcı Adı").foregroundColor(.white.opacity(0.6)))
                         .padding()
-                        .background(Color.white.opacity(0.1))
+                        .background(Color.white.opacity(0.2))
                         .cornerRadius(10)
                         .foregroundColor(.white)
                     
-                    SecureField("Şifre", text: $viewModel.password)
+                    SecureField("", text: $viewModel.password, prompt: Text("Şifre").foregroundColor(.white.opacity(0.6)))
                         .padding()
-                        .background(Color.white.opacity(0.1))
+                        .background(Color.white.opacity(0.2))
                         .cornerRadius(10)
                         .foregroundColor(.white)
                 }

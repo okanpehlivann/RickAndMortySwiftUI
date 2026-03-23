@@ -1,10 +1,3 @@
-//
-//  CharacterCard.swift
-//  RickAndMort
-//
-//  Created by Okan on 18.03.2026.
-//
-
 import SwiftUI
 import Kingfisher
 
@@ -29,10 +22,10 @@ struct CharacterCard: View {
                 
                 HStack(spacing: 5) {
                     Circle()
-                        .fill(character.status == "Alive" ? .green : (character.status == "Dead" ? .red : .gray))
+                        .fill(character.status == CharacterStatus.alive ? .green : (character.status == CharacterStatus.dead ? .red : .gray))
                         .frame(width: 8, height: 8)
                     
-                    Text("\(character.species) - \(character.status)")
+                    Text("\(character.species) - \(character.status.rawValue)")
                         .font(.subheadline).foregroundColor(.gray)
                 }
             }
