@@ -3,9 +3,9 @@ import Foundation
 struct Character: Codable, Identifiable {
     let id: Int
     let name: String
-    let status: CharacterStatus
+    let status: String
     let species: String
-    let gender: CharacterGender
+    let gender: String
     let image: String
 }
 

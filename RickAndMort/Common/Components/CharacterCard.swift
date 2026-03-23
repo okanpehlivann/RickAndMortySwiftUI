@@ -22,10 +22,10 @@ struct CharacterCard: View {
                 
                 HStack(spacing: 5) {
                     Circle()
-                        .fill(character.status == CharacterStatus.alive ? .green : (character.status == CharacterStatus.dead ? .red : .gray))
+                        .fill(character.status == "Alive" ? .green : (character.status == "Dead" ? .red : .gray))
                         .frame(width: 8, height: 8)
                     
-                    Text("\(character.species) - \(character.status.rawValue)")
+                    Text("\(character.species) - \(character.status)")
                         .font(.subheadline).foregroundColor(.gray)
                 }
             }

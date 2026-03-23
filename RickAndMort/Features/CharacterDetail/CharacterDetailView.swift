@@ -1,12 +1,16 @@
 import SwiftUI
 import Kingfisher
+import SwiftData
 
 struct CharacterDetailView: View {
     @State private var viewModel = CharacterDetailViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @Query private var favorites: [FavoriteCharacter]
+    
     let characterId: Int
     
     private let darkNavy = Color(red: 10/255, green: 25/255, blue: 48/255)
-    
+        
     var body: some View {
         ZStack {
             darkNavy.ignoresSafeArea()
@@ -19,6 +23,16 @@ struct CharacterDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.toggleFavorite(context: modelContext, favorites: favorites)
+                } label: {
+                    Image(systemName: viewModel.isFavorite(id: characterId, favorites: favorites) ? "heart.fill" : "heart")
+                        .foregroundColor(viewModel.isFavorite(id: characterId, favorites: favorites) ? .red : .white)
+                }
+            }
+        }
         .task {
             await viewModel.getCharacterDetail(id: characterId)
         }
@@ -78,7 +92,7 @@ struct CharacterDetailView: View {
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)

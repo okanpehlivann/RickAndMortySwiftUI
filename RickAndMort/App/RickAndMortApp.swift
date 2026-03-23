@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct RickAndMortApp: App {
@@ -7,10 +8,12 @@ struct RickAndMortApp: App {
     var body: some Scene {
         WindowGroup {
             if auth.isLoggedIn {
-                HomeView()
+                MainTabView()
+                   
             } else {
                 LoginView()
             }
         }
+        .modelContainer(for: FavoriteCharacter.self)
     }
 }

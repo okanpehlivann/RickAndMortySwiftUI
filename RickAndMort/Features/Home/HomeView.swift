@@ -12,31 +12,43 @@ struct HomeView: View {
                 darkNavy.ignoresSafeArea()
                 
                 ScrollView {
-                    LazyVStack(spacing: 16) {
-                        ForEach(viewModel.characters) { character in
-                            NavigationLink(destination: CharacterDetailView(characterId: character.id)) {
-                                CharacterCard(character: character)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .onAppear {
-                                if character.id == viewModel.characters.last?.id && !viewModel.isLoading {
-                                    Task { await viewModel.fetchCharacters() }
+                    if viewModel.characters.isEmpty && !viewModel.isLoading {
+                        EmptyStateView(
+                            message: "Sonuç bulunamadı.",
+                            onClearFilters: {
+                                viewModel.searchText = ""
+                                viewModel.selectedStatus = nil
+                                viewModel.selectedGender = nil
+                                Task { await viewModel.resetAndFetch()
+                                }
+                            })
+                    } else {
+                        LazyVStack(spacing: 16) {
+                            ForEach(viewModel.characters) { character in
+                                NavigationLink(destination: CharacterDetailView(characterId: character.id)) {
+                                    CharacterCard(character: character)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .onAppear {
+                                    if character.id == viewModel.characters.last?.id && !viewModel.isLoading {
+                                        Task { await viewModel.fetchCharacters() }
+                                    }
                                 }
                             }
-                        }
-                        
-                        if viewModel.isLoading {
-                            HStack {
-                                Spacer()
-                                ProgressView()
-                                    .tint(.cyan)
-                                    .id(UUID())
-                                Spacer()
+                            
+                            if viewModel.isLoading {
+                                HStack {
+                                    Spacer()
+                                    ProgressView()
+                                        .tint(.cyan)
+                                        .id(UUID())
+                                    Spacer()
+                                }
+                                .padding()
                             }
-                            .padding()
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .navigationTitle("Karakterler")
