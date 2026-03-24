@@ -1,6 +1,6 @@
 import Foundation
 
-struct CharacterDetail: Codable {
+struct CharacterDetail: Codable, Identifiable, Equatable {
     let id: Int
     let name: String
     let status: String
@@ -13,6 +13,10 @@ struct CharacterDetail: Codable {
     let episode: [String]
     let url: String
     let created: String
+    
+    static func == (lhs: CharacterDetail, rhs: CharacterDetail) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct LocationInfo: Codable {
