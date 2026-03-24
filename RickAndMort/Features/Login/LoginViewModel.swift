@@ -8,7 +8,8 @@ class LoginViewModel {
     
     func performLogin() {
         if !username.isEmpty && !password.isEmpty {
-            AuthManager.shared.login()
+            guard !username.isEmpty else { return }
+            AuthManager.shared.login(username: username)
         }
     }
 }

@@ -17,7 +17,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            Text("Profil Sayfası (Yakında)")
+            ProfileView()
                 .tabItem {
                     Label("Profil", systemImage: "gearshape.fill")
                 }
